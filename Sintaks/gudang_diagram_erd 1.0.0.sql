@@ -171,3 +171,62 @@ DROP FOREIGN KEY produk_ibfk_2;
 
 ALTER TABLE gudang
 DROP FOREIGN KEY gudang_ibfk_4;
+
+
+-- create index dan full text
+-- list column
+-- nama produk --> produk
+-- nama gudang --> gudang
+-- nama city --> city
+
+
+CREATE INDEX idx_nama_produk ON produk (nama_produk)
+
+SHOW INDEX FROM produk
+
+
+SHOW INDEX FROM gudang
+
+CREATE FULLTEXT INDEX idx_ft_gudang ON gudang(nama_gudang)
+
+SHOW INDEX FROM city_gudang
+
+CREATE INDEX idx_city_gudang ON city_gudang (nama_city)
+
+CREATE FULLTEXT INDEX idx_ft_city_gudang ON city_gudang(nama_city)
+
+CREATE TABLE admin (
+  id_admin INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  hak_akses ENUM('admin', 'superadmin') NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- username harus unik
+ALTER Table admin
+MODIFY username VARCHAR(50) NOT NULL UNIQUE;
+
+
+-- entitas karyawan
+
+-- ini belum di eksekusi
+CREATE TABLE karyawan (
+  id_karyawan INT PRIMARY KEY AUTO_INCREMENT,
+  nama_karyawan VARCHAR(255) NOT NULL,
+  alamat_karyawan VARCHAR(255) NOT NULL,
+  no_hp_karyawan VARCHAR(20) NOT NULL,
+  email_karyawan VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- jenis karyawan
+-- ini belum di eksekusi
+CREATE TABLE jenis_karyawan (
+  jenis_karyawan_id INT PRIMARY KEY AUTO_INCREMENT,
+  nama_jabatan VARCHAR(50) NOT NULL UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
