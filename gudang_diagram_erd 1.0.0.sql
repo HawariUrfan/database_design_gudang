@@ -86,3 +86,14 @@ CREATE INDEX idx_produk ON produk (produk_id);
 -- add fulltext search
 CREATE FULLTEXT INDEX idx_nama_produk ON produk (id_nama_produk);
 CREATE FULLTEXT INDEX idx_deskripsi_produk ON produk (deskpripsi_produk);
+
+-- Add views
+-- Menampilkan nama produk, nama jenis produk, rak gudang, id rak gudang, produk kadaluarsa, jumlah stock
+CREATE VIEW view_produk AS
+SELECT p.produk_id, p.id_nama_produk, jp.nama_jenis_produk, rg.id_rak_gudang, p.produk_kadaluarsa, p.jumlah_stock
+FROM produk p
+JOIN jenis_produk jp ON p.id_jenis_produk = jp.id_jenis_produk
+JOIN rak_gudang rg ON p.id_rak_gudang = rg.id_rak_gudang;
+
+
+SELECT * from view_produk
