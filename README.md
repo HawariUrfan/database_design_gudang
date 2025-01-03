@@ -12,5 +12,6 @@ Next :
 - Trigers
 - Functions
 - Procedures
+- Cardinality
 
 MYSQL 8 -->
