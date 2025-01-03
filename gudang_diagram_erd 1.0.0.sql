@@ -1,4 +1,5 @@
 -- Schema db design gudang sederhana ( masih tahap awal )
+-- db_gudang_prod (name db)
 
 
 
@@ -95,5 +96,8 @@ FROM produk p
 JOIN jenis_produk jp ON p.id_jenis_produk = jp.id_jenis_produk
 JOIN rak_gudang rg ON p.id_rak_gudang = rg.id_rak_gudang;
 
-
-SELECT * from view_produk
+-- Menampilkan informasi tentang gudang, nama, lebar, tinggi, muatan, jumlah rak, dan kota
+CREATE VIEW view_gudang AS
+SELECT
+gg.nama_gudang, kg.lebar_kapasitas_gudang, kg.tinggi_kapasitas_gudang, kg.muatan_kapasitas_gudang, kg.jumlah_rak_kapasitas_gudang, cg.nama_city
+FROM gudang gg JOIN kapasitas_gudang kg ON gg.id_kapasitas_gudang = kg.id_kapasitas_gudang JOIN city_gudang cg ON gg.id_city_gudang = cg.id_city_gudang
